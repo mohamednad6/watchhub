@@ -16,7 +16,7 @@
 
   // ==== EDIT THESE LINES ====
   const firebaseConfig = {
-    apiKey: "AIzaSyB9nzLHtKf3OcQ7qJYB5xx7qV5bnAxO8OI",
+    apiKey: "AIzaSyCJeMKJsOlDJsjEvO6AO2jUy5wwvwwRn7k",
     authDomain: "watch-hub-8701f.firebaseapp.com",
     projectId: "watch-hub-8701f",
     storageBucket: "watch-hub-8701f.firebasestorage.app",
