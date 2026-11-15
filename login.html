@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign in — Watch Hub</title>
+  <meta name="description" content="Sign in to Watch Hub to sync your watchlist across devices.">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0f1115">
+  <link rel="icon" type="image/png" href="icon-192.png">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script>(function(){try{var t=localStorage.getItem('wh-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body data-page="login">
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">Watch<span>Hub</span></a>
+      <div class="header-tools">
+        <button id="themeBtn" class="tool-btn" type="button" title="Toggle theme">◐</button>
+        <button id="langBtn" class="tool-btn" type="button" title="Toggle language">EN</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-main login-main">
+    <section class="login-card">
+      <h1>Sign in to Watch Hub</h1>
+      <p class="login-sub">Keep your watchlist on your account and pick it up on any device.</p>
+
+      <div id="authError" class="auth-error" role="alert" hidden></div>
+
+      <button id="googleBtn" class="google-btn" type="button">
+        <svg class="google-logo" viewBox="0 0 48 48" width="20" height="20" aria-hidden="true" focusable="false">
+          <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+          <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+          <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+          <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+        </svg>
+        <span>Continue with Google</span>
+      </button>
+
+      <div class="divider"><span>or</span></div>
+
+      <form id="loginForm" novalidate>
+        <label class="field" id="loginNameWrap" hidden>
+          <span>Name</span>
+          <input id="loginName" type="text" autocomplete="name" placeholder="Your name">
+        </label>
+        <label class="field">
+          <span>Email</span>
+          <input id="loginEmail" type="email" autocomplete="email" placeholder="you@example.com" required>
+        </label>
+        <label class="field">
+          <span>Password</span>
+          <input id="loginPassword" type="password" autocomplete="current-password" placeholder="At least 6 characters" required>
+        </label>
+        <button id="loginSubmit" class="btn primary login-submit" type="submit">Sign In</button>
+      </form>
+
+      <p class="login-switch">
+        <span id="modeText">New to Watch Hub?</span>
+        <a href="#" id="modeLink">Create Account</a>
+      </p>
+
+      <p class="login-guest"><a href="index.html">Continue as guest →</a></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>This product uses the TMDB API but is not endorsed or certified by
+      <a href="https://www.themoviedb.org" target="_blank" rel="noopener">TMDB</a>.</p>
+  </footer>
+
+  <script defer src="common.js"></script>
+  <script defer src="auth.js"></script>
+  <script defer src="nav.js"></script>
+</body>
+</html>
