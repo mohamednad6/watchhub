@@ -1,0 +1,106 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WatchHub — Project Report</title><link rel="icon" href="icon-192.png"><style>
+:root{--bg:#0b0d12;--card:#141821;--line:#262c39;--txt:#e8ebf2;--mut:#9aa3b2;--red:#e50914}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--txt);font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;line-height:1.75}
+.wh-nav{position:sticky;top:0;z-index:10;display:flex;gap:18px;align-items:center;padding:12px 24px;background:rgba(11,13,18,.92);border-bottom:1px solid var(--line);backdrop-filter:blur(6px);flex-wrap:wrap}
+.wh-nav a{color:var(--mut);text-decoration:none;font-weight:600;font-size:14px}.wh-nav a:hover{color:#fff}.wh-nav a.on{color:#fff}
+.wh-nav-right{margin-left:auto;display:flex;gap:10px}.wh-nav-right a{border:1px solid var(--red);color:#fff;padding:5px 12px;border-radius:999px}.wh-nav-right a.on{background:var(--red)}
+.wrap{max-width:900px;margin:0 auto;padding:40px 24px 80px}
+h1{font-size:32px;line-height:1.25;margin:.2em 0}h2{font-size:22px;margin:2.2em 0 .6em;padding-top:.6em;border-top:1px solid var(--line)}h3{font-size:17px;margin:1.6em 0 .4em}
+p{margin:.7em 0}ul,ol{padding-left:1.3em}li{margin:.35em 0}strong{color:#fff}
+.meta{color:var(--mut);font-size:15px}.ids{color:#ffd166;font-weight:700}
+table{border-collapse:collapse;width:100%;margin:1em 0;font-size:14px}th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}th{background:#1b2130;color:#fff}
+blockquote{margin:1em 0;padding:.6em 1em;border-left:3px solid var(--red);background:#12161f;color:var(--mut)}
+a{color:#ff6b6b}.btn{display:inline-block;background:var(--red);color:#fff!important;padding:9px 18px;border-radius:999px;text-decoration:none;font-weight:700;margin:6px 8px 6px 0}
+.note{background:#12161f;border:1px solid var(--line);border-radius:10px;padding:14px 18px;color:var(--mut);font-size:14px}
+</style></head><body>
+<nav class="wh-nav"><a href="index.html">Home</a><a href="movies.html">Movies</a><a href="series.html">Series</a><a href="anime.html">Anime</a><a href="watchlist.html">Watchlist</a><span class="wh-nav-right"><a href="report.html" class="on">Report</a><a href="slides.html">Slides</a></span></nav><main class="wrap"><h1>WatchHub — Project Report</h1>
+<p class="meta"><strong>Course:</strong> Object Oriented Programming  ·  <strong>Professor:</strong> Prof. Joe</p>
+<p class="meta"><strong>Student:</strong> Mohamed Nadoui  ·  <strong>ID:</strong> <span class="ids">2420302159</span></p>
+<p class="meta"><strong>With:</strong> Mohamed Amine El Mabchour  ·  <strong>ID:</strong> <span class="ids">2420302140</span></p>
+<p class="meta"><strong>AI assistant used:</strong> TRAE (True Code)</p><p><a class="btn" href="WatchHub_Slides.pptx" download>⬇ Download the presentation (.pptx)</a><a class="btn" href="slides.html">View the slides online &rarr;</a></p>
+<p class="note">These are the supporting documents for our Object Oriented Programming project. Slides on the class website are screenshots of the presentation; the button above downloads the original editable file.</p><a>Watch<span>Hub</span></a>
+    
+  
+
+  
+    
+      
+      <p>A personal movie-watchlist web app, built and shipped to the web.</p>
+      
+        <span>Student: Mohamed Nadoui</span>
+        <span>HTML · CSS · JavaScript</span>
+        <span>Firebase + Firestore</span>
+        <span>TMDB API</span>
+        <span>GitHub Pages</span>
+      
+    
+
+    <h2>1. Introduction</h2>
+    <p>WatchHub is a web application that lets a person keep one organised list of the movies they want to watch, the movies they have already seen, and what they thought of them. The problem it solves is simple and familiar: film recommendations are scattered across streaming apps, notes and browser tabs, with no single place that travels with you. WatchHub gathers everything into one clean, cloud-synced list available from any device.</p>
+    <p>This report explains why the project was built, what it does, how it is put together, how it was built, the problems met along the way, and what was learned. The application is finished and live on the web.</p>
+
+    <h2>2. Motivation and Goals</h2>
+    <ul>
+      <li>One unified list instead of many scattered notes.</li>
+      <li>Real movie data, so every entry has a title, poster and details.</li>
+      <li>Accounts and cloud sync, so the list follows the user everywhere.</li>
+      <li>A fast, good-looking interface that works on phone and laptop alike.</li>
+    </ul>
+    <p>The wider aim was educational: to build and ship a complete, real web app rather than a classroom exercise, and to understand how the different parts of a modern web application fit together.</p>
+
+    <h2>3. Features</h2>
+    <table>
+      <tr><th>Feature</th><th>What it does</th></tr>
+      <tr><td>Search &amp; Discover</td><td>Find any real movie through the TMDB database, with poster and details.</td></tr>
+      <tr><td>My Watchlist</td><td>Save a movie, mark it watched, rate it 1–5 stars and add a short review.</td></tr>
+      <tr><td>Status filter</td><td>Switch between "to watch" and "seen it" so the next movie is always clear.</td></tr>
+      <tr><td>Sign in &amp; Sync</td><td>Create an account with email or continue with Google; the list syncs to every device.</td></tr>
+      <tr><td>Guest mode</td><td>Browse and use the app without creating an account.</td></tr>
+      <tr><td>Language toggle</td><td>Switch the interface between English and French.</td></tr>
+    </table>
+
+    <h2>4. How It Fits Together</h2>
+    <p>WatchHub is a browser application with no server of its own to maintain. It is built from four pieces that each have one clear job:</p>
+    <table>
+      <tr><th>Piece</th><th>Role</th></tr>
+      <tr><td>Web App (HTML/CSS/JS)</td><td>Everything the user sees and clicks, running in the browser.</td></tr>
+      <tr><td>Firebase Authentication</td><td>Creates accounts and signs users in, by email or Google.</td></tr>
+      <tr><td>Cloud Firestore</td><td>The cloud database that stores each user's saved movies.</td></tr>
+      <tr><td>TMDB API</td><td>Supplies real movie search results, posters and details.</td></tr>
+    </table>
+    <p>When a user searches for a movie, the app asks TMDB and shows the results. When they save one, the app writes it to Firestore under that user's account, so signing in on another device shows the same list. Authentication decides who the user is; Firestore remembers what they saved.</p>
+
+    <h2>5. Design Choices</h2>
+    <p>The interface is dark-first on purpose: a dark background lets movie posters stand out, and a single crimson accent colour keeps the look consistent. The layout is responsive, so it stays readable on a small phone screen and a large laptop screen. Changes happen without reloading the page, which makes the app feel quick and immediate.</p>
+
+    <h2>6. How It Was Built</h2>
+    <p>The code was written by hand with the help of an AI coding assistant, which acted as a pair programmer: suggesting code, explaining errors and speeding up repetitive work. The site is hosted free on GitHub Pages, which rebuilds and publishes the site automatically each time the code is updated. There is no server to rent, configure or maintain, and the app costs nothing to run.</p>
+    <p>Development moved in small, testable steps: first the pages and layout, then movie search, then the watchlist, and finally accounts and sync. Each step was checked in the browser before moving to the next.</p>
+
+    <h2>7. Challenges and How They Were Solved</h2>
+    <p>The most valuable learning came from debugging. Three real problems stood out:</p>
+    <table>
+      <tr><th>Problem</th><th>Cause</th><th>Fix</th></tr>
+      <tr><td>Sign-in failed with a confusing "API key expired" message</td><td>The app's config pointed at the wrong Firebase project, so Google rejected the key.</td><td>Traced it using Google's own raw error response, then replaced the key with the correct one.</td></tr>
+      <tr><td>Sign-in blocked on the live site</td><td>The deployed domain was not on Firebase's allowed list.</td><td>Added the GitHub Pages domain to Firebase's authorised domains.</td></tr>
+      <tr><td>Old version kept appearing after an update</td><td>The browser cached the old JavaScript file.</td><td>Hard-refreshed and confirmed the new file was actually published to GitHub.</td></tr>
+    </table>
+    The first bug was the most instructive. The error message was misleading, and it was tempting to trust it. Instead the raw response from Google's servers was examined directly, which revealed the real cause: the key simply did not belong to this project. That habit — checking the primary source rather than the friendly message — turned out to be the key to solving all three problems.
+
+    <h2>8. What I Learned</h2>
+    <ul>
+      <li>Front-end fundamentals: how HTML, CSS and JavaScript work together in a real app.</li>
+      <li>Firebase: how authentication and a cloud database are configured and secured.</li>
+      <li>Working with third-party APIs, and reading the data they return.</li>
+      <li>Debugging methodically: reproduce, check the real error, form a theory, test it.</li>
+      <li>Deployment: how a site goes from code on a laptop to a live public URL.</li>
+    </ul>
+    <p>Above all, the project showed that a small idea, built carefully and finished, becomes something real that other people can actually use.</p>
+
+    <h2>9. Conclusion</h2>
+    <p>WatchHub meets every goal set at the start: it is a single, good-looking, cloud-synced place to track films, and it is live on the web today. It is also a complete learning journey, from a blank page to a deployed application, including the unavoidable and educational struggle of making it actually work. Future improvements could include sharing lists with friends, watch reminders, and recommendations based on ratings.</p>
+
+    <h2>View the Project</h2>
+    <p>Live site: <a href="https://mohamednad6.github.io/watchhub/" target="_blank" rel="noopener">mohamednad6.github.io/watchhub</a><br>
+    Source code: <a href="https://github.com/mohamednad6/watchhub" target="_blank" rel="noopener">github.com/mohamednad6/watchhub</a></p>
+<p style="margin-top:40px"><a href="index.html">&larr; Back to WatchHub</a></p></main></body></html>
