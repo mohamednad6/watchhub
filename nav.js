@@ -1,7 +1,8 @@
 /* Watch Hub — nav.js
-   Header interactions ONLY: attaches listeners to elements that already exist.
-   Never creates, replaces or renames elements, never touches styles or classes,
-   never redefines functions. If a needed function is missing, it skips. */
+   Header interactions: attaches listeners to elements that already exist and
+   inserts the Report / Slides links before the Install button. Never replaces
+   or renames existing elements, never touches their styles or classes, never
+   redefines functions. If a needed function is missing, it skips. */
 (function () {
   function on(elm, ev, fn) { if (elm) elm.addEventListener(ev, fn); }
 
@@ -25,6 +26,21 @@
   if (installBtn && typeof window.promptInstall === 'function') {
     on(installBtn, 'click', function () { window.promptInstall(); });
     window.addEventListener('wh-installable', function () { installBtn.hidden = false; });
+  }
+
+  /* ---- Report / Slides links, inserted just before the Install button ----
+     They go into the header tools row so they sit beside the other actions;
+     the class reuses the nav link styling from style.css. */
+  var tools = document.querySelector('.header-tools');
+  if (tools && installBtn) {
+    [{ href: 'report.html', label: 'Report' },
+     { href: 'slides.html', label: 'Slides' }].forEach(function (item) {
+      var link = document.createElement('a');
+      link.href = item.href;
+      link.textContent = item.label;
+      link.className = 'tool-link';
+      tools.insertBefore(link, installBtn);
+    });
   }
 
   /* ---- auth UI ----

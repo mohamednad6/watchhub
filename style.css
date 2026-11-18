@@ -75,7 +75,7 @@ a { color: inherit; }
   padding: 6px 10px;
 }
 .nav-links { display: flex; gap: 4px; }
-.nav-links a {
+.nav-links a, .header-tools a.tool-link {
   text-decoration: none;
   color: var(--text-dim);
   font-weight: 600;
@@ -83,7 +83,7 @@ a { color: inherit; }
   border-radius: 8px;
   transition: color 0.15s, background 0.15s;
 }
-.nav-links a:hover { color: var(--text); background: var(--bg-card); }
+.nav-links a:hover, .header-tools a.tool-link:hover { color: var(--text); background: var(--bg-card); }
 .nav-links a[aria-current="page"] { color: var(--accent); background: var(--accent-soft); }
 .header-tools { margin-left: auto; display: flex; align-items: center; gap: 8px; }
 #searchInput {
