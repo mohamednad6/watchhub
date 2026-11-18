@@ -287,6 +287,7 @@ window.promptInstall = function () {
 /* ---- service worker registration ---- */
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function () {
-    navigator.serviceWorker.register('sw.js').catch(function () {});
+    var reg = navigator.serviceWorker.register('sw.js', { updateViaCache: 'none' });
+    reg.then(function (r) { return r.update(); }).catch(function () {});
   });
 }

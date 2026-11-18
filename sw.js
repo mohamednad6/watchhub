@@ -1,8 +1,10 @@
 /* Watch Hub — service worker
-   Cache-first for app assets, network-only for TMDB and Google Fonts. */
+   Network-first for app assets so a deploy is picked up on the next load;
+   the cache is only a fallback for offline use.
+   Network-only for TMDB and Google Fonts. */
 
-const VERSION = 'v3.3';
-const CACHE = 'watch-hub-v3.3';
+const VERSION = 'v4.0';
+const CACHE = 'watch-hub-v4.0';
 
 const ASSETS = [
   'index.html',
@@ -14,6 +16,7 @@ const ASSETS = [
   'common.js',
   'page.js',
   'nav.js',
+  'auth.js',
   'manifest.json'
 ];
 
@@ -34,6 +37,7 @@ self.addEventListener('install', function (event) {
   event.waitUntil(
     caches.open(CACHE)
       .then(function (cache) { return cache.addAll(ASSETS); })
+      .catch(function () {})
       .then(function () { return self.skipWaiting(); })
   );
 });
@@ -54,19 +58,24 @@ self.addEventListener('fetch', function (event) {
   if (event.request.method !== 'GET') return;
   const url = new URL(event.request.url);
 
-  if (isNetworkOnly(url)) return; // network-only: let the browser hit the network
+  /* third-party APIs and fonts: always straight to the network */
+  if (isNetworkOnly(url)) return;
 
-  // cache-first for app assets; runtime-cache anything else same-origin (icons, etc.)
+  /* network-first: fresh files when online, cache only when offline */
   event.respondWith(
-    caches.match(event.request).then(function (hit) {
-      if (hit) return hit;
-      return fetch(event.request).then(function (response) {
+    fetch(event.request)
+      .then(function (response) {
         if (response && response.ok && url.origin === self.location.origin) {
           const copy = response.clone();
           caches.open(CACHE).then(function (cache) { cache.put(event.request, copy); });
         }
         return response;
-      });
-    })
+      })
+      .catch(function () {
+        return caches.match(event.request).then(function (hit) {
+          if (hit) return hit;
+          if (event.request.mode === 'navigate') return caches.match('index.html');
+        });
+      })
   );
 });
